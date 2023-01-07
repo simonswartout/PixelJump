@@ -2101,9 +2101,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 285195168119552617, guid: 999e8c44d173c7b43859a04b381b7533, type: 3}
+      propertyPath: m_Drag
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 285195168119552618, guid: 999e8c44d173c7b43859a04b381b7533, type: 3}
       propertyPath: moveSpeed
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 285195168119552618, guid: 999e8c44d173c7b43859a04b381b7533, type: 3}
       propertyPath: sceneController
