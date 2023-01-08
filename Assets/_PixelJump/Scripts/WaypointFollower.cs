@@ -6,7 +6,9 @@ public class WaypointFollower : MonoBehaviour
 {
     [SerializeField] GameObject[] waypoints;
     int currentWaypointIndex = 0;
+    public GameObject CurrentWaypoint => waypoints[currentWaypointIndex];
     [SerializeField] float speed = 1f;
+    [SerializeField] float rotateSpeed = 1f;
 
     void Awake()
     {
@@ -18,17 +20,19 @@ public class WaypointFollower : MonoBehaviour
     }
 
     // Update is called once per frame
+    bool IsAtWaypoint => Vector3.Distance(transform.position, CurrentWaypoint.transform.position) < 0.1f;
+   
     void Update()
     {
-        if(Vector3.Distance(transform.position, waypoints[currentWaypointIndex].transform.position) < 0.1f)
+        if(IsAtWaypoint)
         {
             currentWaypointIndex++;
-            if(currentWaypointIndex >= waypoints.Length)
-            {
-                currentWaypointIndex = 0;
-            }
+            if(currentWaypointIndex >= waypoints.Length) currentWaypointIndex = 0;
+            
         }
-        transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, speed * Time.deltaTime);
+        transform.position += transform.forward * speed * Time.deltaTime;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(CurrentWaypoint.transform.position - transform.position), rotateSpeed * Time.deltaTime);
     }
+
 
 }

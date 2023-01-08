@@ -1639,6 +1639,7 @@ MonoBehaviour:
   - {fileID: 596622464}
   - {fileID: 792282208}
   speed: 1
+  rotateSpeed: 100
 --- !u!1 &1727920309
 GameObject:
   m_ObjectHideFlags: 0
@@ -2107,7 +2108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 285195168119552618, guid: 999e8c44d173c7b43859a04b381b7533, type: 3}
       propertyPath: moveSpeed
-      value: 25
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 285195168119552618, guid: 999e8c44d173c7b43859a04b381b7533, type: 3}
       propertyPath: sceneController
@@ -2117,6 +2118,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 776664562208358648, guid: 999e8c44d173c7b43859a04b381b7533, type: 3}
+      propertyPath: sceneController
+      value: 
+      objectReference: {fileID: 1103096470}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 999e8c44d173c7b43859a04b381b7533, type: 3}
 --- !u!1001 &4555524443580666201

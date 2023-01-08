@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public SceneController sceneController;
+    PlayerController playerController;
     Rigidbody rb;
-
-    Vector3 startingPosition;
-
     [SerializeField] float moveSpeed = 10f;
     
     [SerializeField] float jumpForce = 10f;
@@ -17,14 +14,10 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] int maxJumps = 2;
 
-    [SerializeField] LayerMask playerLayer;
-
-    [SerializeField] float fallOffDistance = -10f;
-
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        startingPosition = transform.position; //set player starting position
+        playerController = GetComponent<PlayerController>(); 
     }
     void Start()
     {
@@ -37,22 +30,9 @@ public class PlayerMovement : MonoBehaviour
         Move();
         Jump();
         SetLookDirection();
-        FallRecovery();
         IsGrounded();
 
 
-    }
-
-    bool PlayerDied()
-    {
-        if (transform.position.y < fallOffDistance)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
    
 
@@ -97,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void IsGrounded()
     {
-        if(Physics.Raycast(transform.position, Vector3.down, 1f, ~playerLayer))
+        if(Physics.Raycast(transform.position, Vector3.down, 1f, ~playerController.PlayerLayer))
         {
             jumpsTaken = 0;
         }
@@ -110,7 +90,8 @@ public class PlayerMovement : MonoBehaviour
 
 #endregion 
 
-        
+
+#region Collisions
     
     public void OnCollisionEnter(Collision collision)
     {
@@ -122,24 +103,6 @@ public class PlayerMovement : MonoBehaviour
             transform.SetParent(stickyPlatform.transform);
         }
 
-        if(collision.gameObject.CompareTag("Enemy Body"))
-        {
-            if (transform.position.y > collision.transform.position.y)
-            {
-                Destroy(collision.gameObject);
-            }
-            else
-            {
-                Die();
-            }
-        }
-
-        if(collision.gameObject.CompareTag("Victory Platform"))
-        {
-            GetComponent<Rigidbody>().isKinematic = true;
-            GetComponent<PlayerMovement>().enabled = false;
-            //sceneController.LoadNextScene();
-        }
     }
 
     void OnCollisionExit(Collision collision)
@@ -151,34 +114,6 @@ public class PlayerMovement : MonoBehaviour
             transform.SetParent(null);
         }
     }
-    void FallRecovery()
-    {
-        if (transform.position.y < fallOffDistance) 
-        {
-            Die();
-        }
-    }
-    
-    void Die()
-    {
-        Transform[] children = GetComponentsInChildren<Transform>();
-        foreach (Transform child in children)
-        {
-            MeshRenderer renderer = child.GetComponent<MeshRenderer>();
-            if (renderer != null)
-            {
-            renderer.enabled = false;
-            }
-        }
-        transform.position += new Vector3(0, 3, 0);
-        GetComponent<MeshRenderer>().enabled = false;
-        GetComponent<Rigidbody>().isKinematic = true;
-        GetComponent<PlayerMovement>().enabled = false;
-        Invoke(nameof(ReloadLevel), 1.3f);
-    }
+#endregion
 
-    void ReloadLevel()
-    {
-        sceneController.ReloadScene();
-    }
 }
