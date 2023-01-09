@@ -1587,7 +1587,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1665559103}
   - component: {fileID: 1665559105}
-  - component: {fileID: 1665559104}
+  - component: {fileID: 1665559106}
+  - component: {fileID: 1665559107}
   m_Layer: 0
   m_Name: moving_platform
   m_TagString: Untagged
@@ -1611,7 +1612,40 @@ Transform:
   m_Father: {fileID: 1851644491}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1665559104
+--- !u!114 &1665559105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665559102}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558b4c6d1f95fbb47a3dd621efa52eb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints:
+  - {fileID: 596622464}
+  - {fileID: 792282208}
+  speed: 1
+  rotateSpeed: 100
+--- !u!114 &1665559106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665559102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcebe7b649370464e97d71f051d0a520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints:
+  - {fileID: 596622464}
+  - {fileID: 792282208}
+  speed: 1
+--- !u!114 &1665559107
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1623,23 +1657,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4068a6aa0da7ab4d8fca866f0966150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1665559105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665559102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 558b4c6d1f95fbb47a3dd621efa52eb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 596622464}
-  - {fileID: 792282208}
-  speed: 1
-  rotateSpeed: 100
 --- !u!1 &1727920309
 GameObject:
   m_ObjectHideFlags: 0

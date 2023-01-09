@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     PlayerMovement playerMovement;
+    PlayerAnimation playerAnimation;
 
     
     public PlayerMovement PlayerMovement => playerMovement;
+    public PlayerAnimation PlayerAnimation => playerAnimation;
     public LayerMask PlayerLayer => playerLayer;
     public float Health => health;
 
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        playerAnimation = GetComponent<PlayerAnimation>();
     }
 
     void Update() 
@@ -40,12 +43,17 @@ public class PlayerController : MonoBehaviour
         health -= amount;
         if (health <= 0)
         {
-            Die();
+            DieFromEnemy();
         }
     }
-    void Die()
+    void DieFromFall()
     {
         playerModel.SetActive(false);
+        ReloadLevel(1.3f);
+    }
+
+    void DieFromEnemy()
+    {
         ReloadLevel(1.3f);
     }
 
@@ -79,7 +87,7 @@ public class PlayerController : MonoBehaviour
     {
         if (transform.position.y < fallOffDistance) 
         {
-            Die();
+            DieFromFall();
         }
     }
 }
