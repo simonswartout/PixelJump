@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] int maxJumps = 2;
 
+    public float velocity = 0f;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -46,18 +48,22 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKey(KeyCode.A))
         {
             rb.AddForce(Vector3.left * moveSpeed * Time.deltaTime, ForceMode.Impulse);
+            velocity = rb.velocity.x;
         }
         if(Input.GetKey(KeyCode.D))
         {
             rb.AddForce(Vector3.right * moveSpeed * Time.deltaTime, ForceMode.Impulse);
+            velocity = rb.velocity.x;
         }
         if(Input.GetKey(KeyCode.W))
         {
             rb.AddForce(Vector3.forward * moveSpeed * Time.deltaTime, ForceMode.Impulse);
+            velocity = rb.velocity.z;
         }
         if(Input.GetKey(KeyCode.S))
         {
             rb.AddForce(Vector3.back * moveSpeed * Time.deltaTime, ForceMode.Impulse);
+            velocity = rb.velocity.z;
         }
     }
 #region Jumping

@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
+    Rigidbody rb;
     Animator animator;
     PlayerController playerController;
+
+    public float Health => playerController.Health;
+
     public PlayerController PlayerController => playerController;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
         playerController = GetComponent<PlayerController>();
     }
 
@@ -18,13 +23,11 @@ public class PlayerAnimation : MonoBehaviour
     void Update()
     {
        IsRunning();
-       IsDead();
     }
 
     void IsRunning() 
     {
-        
-            if (animator.GetBool("IsDead") == false && Input.GetKey(KeyCode.A))
+            if (animator.GetBool("IsDead") == false && Input.GetKey(KeyCode.A)) 
             {
                 animator.SetBool("IsRunning", true);
             }
@@ -44,19 +47,14 @@ public class PlayerAnimation : MonoBehaviour
             {
                 animator.SetBool("IsRunning", false);
             }
+    }
+    void OnDeathAnimation() // this function plays the death animation and returns the length of the animation
+    {
+        animator.SetBool("IsDead", true);
         
     }
-
-    void IsDead()
-    {
-        if (playerController.Health <= 0)
-        {
-            animator.SetBool("IsDead", true);
-            Debug.Log("Dead");
-        }
-        else
-        {
-            animator.SetBool("IsDead", false);
-        }
-    }
 }
+        
+    
+
+
